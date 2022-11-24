@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="gesarticles.css" />
+    <script src="https://kit.fontawesome.com/0e22389e8c.js" crossorigin="anonymous"></script>
+    <script src="gesarticles.js" defer></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h2>Formulaire des produits de vente</h2>
+      </div>
+      <form  id="form" class="form">
+        <div class="form-control">
+          <label for="firstname">Nom</label>
+          <input type="text" placeholder="Nom" id="nom" />
+          <i class="fas fa-check-circle"></i>
+          <i class="fas fa-exclamation-circle"></i>
+          <small>Error message</small>
+          <samp></samp>
+      </div>
+      <div class="form-control">
+        <label for="firstname">Prix</label>
+        <input type="text" placeholder="1500$" id="prix" />
+        <i class="fas fa-check-circle"></i>
+        <i class="fas fa-exclamation-circle"></i>
+        <small>Error message</small>
+        <samp></samp>
+    </div>
+    <div class="form-control">
+      <label for="firstname">Marque</label>
+      <input type="text" placeholder="The Ordinary" id="marque" />
+      <i class="fas fa-check-circle"></i>
+      <i class="fas fa-exclamation-circle"></i>
+      <small>Error message</small>
+      <samp></samp>
+  </div>
+  <div class="form-control">
+    <label for="firstname">Date Production:</label>
+    <input type="date" placeholder="first_name" id="date" />
+    <i class="fas fa-check-circle"></i>
+    <i class="fas fa-exclamation-circle"></i>
+    <small>Error message</small>
+    <samp></samp>
+</div>
+        <div class="frm">
+          <label>Type:</label>
+          <select title="type">
+            <option selected>Type</option>
+            <option>hygiène et toilette</option>
+            <option>soins esthétiques</option>
+            <option>produits solaires</option>
+            <option>beauté des mains et des pieds</option>
+            <option>produits de maquillage</option>
+            <option>entretien capillaires</option>
+            <option>parfums</option>
+          </select>
+        </div>
+        <div class="form-control">
+          <label>Est en Promotion:</label>
+          <div class="fm">
+            <div><label><input type="radio" title="g"  name="M"/>Oui</label></div>
+            <div><label><input type="radio" title="g" name="M"/>Non</label></div>
+          </div>
+          <div class="mis1"></div>
+        </div>
+        <input  class="btn" type="button" value="submit" onclick=" boom()" >
+      </form>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Nom</th>
+            <th scope="col">Prix</th>
+            <th scope="col">Marque</th>
+            <th scope="col">Date Production</th>
+            <th scope="col">Type</th>
+            <th scope="col">Promotion</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>eyeliner</td>
+            <td>1500$</td>
+            <td>balenciaga</td>
+            <td>11/05/2002</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>
