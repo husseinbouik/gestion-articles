@@ -193,13 +193,13 @@ var selectedRow = null;
 
 }
 function onEdit(td){
-  selectedRow =td.parentElement.parentElement;
-  document.getElementById("nom").value= selectedRow.cell[0].innerHTML;
-document.getElementById("prix").value= selectedRow.cell[1].innerHTML;
-document.getElementById("marque").value= selectedRow.cell[2].innerHTML;
-document.getElementById("date").value= selectedRow.cell[3].innerHTML;
-document.getElementById("type").value= selectedRow.cell[4].innerHTML;
-// document.getElementById("").value= selectedRow.cell[5].innerHTML;
+selectedRow =td.parentElement.parentElement;
+document.getElementById("nom").value= selectedRow.cells[0].innerHTML;
+document.getElementById("prix").value= selectedRow.cells[1].innerHTML;
+document.getElementById("marque").value= selectedRow.cells[2].innerHTML;
+document.getElementById("date").value= selectedRow.cells[3].innerHTML;
+document.getElementById("type").value= selectedRow.cells[4].innerHTML;
+// document.getElementById("").value= selectedRow.cells[5].innerHTML;
 }
 function updateRecord(formData){
   selectedRow.cells[0].innerHTML = formData.nom;
