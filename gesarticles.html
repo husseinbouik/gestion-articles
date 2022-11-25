@@ -14,17 +14,17 @@
       <div class="header">
         <h2>Formulaire des produits de vente</h2>
       </div>
-      <form  id="form" class="form">
+      <form  id="form" class="form" onsubmit="event.preventDefault();onFormSubmit();"autoucomplete="off">
         <div class="form-control">
-          <label for="firstname">Nom</label>
-          <input type="text" placeholder="Nom" id="nom" />
+          <label for="nom">Nom</label>
+          <input type="text" placeholder="Nom" id="nom"/>
           <i class="fas fa-check-circle"></i>
           <i class="fas fa-exclamation-circle"></i>
           <small>Error message</small>
           <samp></samp>
       </div>
       <div class="form-control">
-        <label for="firstname">Prix</label>
+        <label for="prix">Prix</label>
         <input type="text" placeholder="1500$" id="prix" />
         <i class="fas fa-check-circle"></i>
         <i class="fas fa-exclamation-circle"></i>
@@ -32,7 +32,7 @@
         <samp></samp>
     </div>
     <div class="form-control">
-      <label for="firstname">Marque</label>
+      <label for="marque">Marque</label>
       <input type="text" placeholder="The Ordinary" id="marque" />
       <i class="fas fa-check-circle"></i>
       <i class="fas fa-exclamation-circle"></i>
@@ -40,17 +40,17 @@
       <samp></samp>
   </div>
   <div class="form-control">
-    <label for="firstname">Date Production:</label>
+    <label for="date">Date Production:</label>
     <input type="date" placeholder="first_name" id="date" />
     <i class="fas fa-check-circle"></i>
     <i class="fas fa-exclamation-circle"></i>
     <small>Error message</small>
     <samp></samp>
 </div>
-        <div class="frm">
+        <div class="form-control">
           <label>Type:</label>
-          <select title="type">
-            <option selected>Type</option>
+          <select title="type" id="type" >
+            <option value="">--Type--</option>
             <option>hygiène et toilette</option>
             <option>soins esthétiques</option>
             <option>produits solaires</option>
@@ -59,6 +59,8 @@
             <option>entretien capillaires</option>
             <option>parfums</option>
           </select>
+          <small></small>
+          <samp></samp>
         </div>
         <div class="form-control">
           <label>Est en Promotion:</label>
@@ -68,9 +70,9 @@
           </div>
           <div class="mis1"></div>
         </div>
-        <input  class="btn" type="button" value="submit" onclick=" boom()" >
+        <input  class="btn" type="submit" value="submit" onclick=" boom()" >
       </form>
-      <table class="table">
+      <table class="table" id="productsdetails">
         <thead>
           <tr>
             <th scope="col">Nom</th>
@@ -79,17 +81,10 @@
             <th scope="col">Date Production</th>
             <th scope="col">Type</th>
             <th scope="col">Promotion</th>
+            <th scope="col"></th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>eyeliner</td>
-            <td>1500$</td>
-            <td>balenciaga</td>
-            <td>11/05/2002</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
         </tbody>
       </table>
     </div>
