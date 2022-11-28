@@ -19,15 +19,15 @@ function validatenom(lnom) {
     setSuccessFor(lnom, "Looks Good!");
   }
 }
-function validateprix(lprix) {
-  if (lprix.value.trim() === "") {
-    setErrorFor(lprix, "Last name is required");
-  } else if (lprix.value.length < 3 || lprix.value.length > 30) {
-    setErrorFor(lprix, "Last name is invalid");
-  } else {
-    setSuccessFor(lprix, "Looks Good!");
-  }
-}
+// function validateprix(lprix) {
+//   if (lprix.value.trim() === "") {
+//     setErrorFor(lprix, "Last name is required");
+//   } else if (lprix.value.length < 3 || lprix.value.length > 30|| ) {
+//     setErrorFor(lprix, "Last name is invalid");
+//   } else {
+//     setSuccessFor(lprix, "Looks Good!");
+//   }
+// }
 function validatemarque(lmarque) {
   if (lmarque.value.trim() === "") {
     setErrorFor(lmarque, "Last name is required");
@@ -37,14 +37,14 @@ function validatemarque(lmarque) {
     setSuccessFor(lmarque, "Looks Good!");
   }
 }
-
-function validateemail(ema) {
-  if (ema.value.trim() === "") {
-    setErrorFor(ema, "Email  is required");
-  } else if (ema.value.match(/^\w+([\.-]?\w+)*@*(ofppt)*(\.ma)+$/g)) {
-    setSuccessFor(ema, "Looks Good!");
+function validateprix(lprix) {
+  if (lprix.value.trim() === "") {
+    setErrorFor(lprix, "price  is required");
+  } else if (lprix.value.length < 1 || lprix.value.length > 30 || lprix.value.match(/([A-Z]{3}|[A-Z]?[\$€¥])?\s?(\d{1,3}((,\d{1,3})+)?(.\d{1,3})?(.\d{1,3})?(,\d{1,3})?)/ )
+    ) {
+    setSuccessFor(lprix, "Looks Good!");
   } else {
-    setErrorFor(ema, "Email is invalid");
+    setErrorFor(lprix, "price is invalid");
   }
 }
 function validatephone(phone) {
@@ -108,10 +108,12 @@ function boom() {
   }
   var gen = !Promo[0].checked && !Promo[1].checked;
   if (Promo[0].checked) {
+    arr.push(true);
     mis1.innerHTML = "Look good !";
     mis1.style.color = "green";
     promo=document.getElementById("o").value;
   } else if(Promo[1].checked){
+    arr.push(true);
     mis1.innerHTML = "Look good !";
     mis1.style.color = "green";
     promo=document.getElementById("n").value;
@@ -123,6 +125,7 @@ if (typeValue ===''){
   setErrorFor(type,"choose one");
 }else{
   setSuccessFor(type,"Looks good!");
+  arr.push(true);
 }
 }
 function setErrorFor(input, message) {
@@ -137,16 +140,15 @@ function setSuccessFor(input, message) {
   formControl.className = "form-control success";
   samp.innerText = message;
 }
-
 var selectedRow = null;
 function onFormSubmit() {
+  boom();
   var formData = readFormData();
-  if( selectedRow == null)
+  if( selectedRow == null && arr.length!=6)
         insertNewRecord(formData);
         else
-        updateRecord(formData)
-
-  resetform();
+        updateRecord(formData);
+        resetform();
 }
 function readFormData() {
   var formData =[];
@@ -231,6 +233,5 @@ function onDelete(td){
    row = td.parentElement.parentElement;
    document.getElementById("productsdetails").deleteRow(row.rowIndex);
    resetform();
-
   }
 }
