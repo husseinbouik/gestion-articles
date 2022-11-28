@@ -210,12 +210,12 @@ if (Promo[0].checked) {
 } else {
   document.getElementById("n").value= selectedRow.cells[5].innerHTML;
 }
-if (promo==='Oui') {
-Promo[0].unchecked=Promo[0].checked;
-Promo[1].unchecked=Promo[1].unchecked;
+if (promo===document.getElementById("o").value) {
+Promo[0]=Promo[0].checked;
+Promo[1]=Promo[1].unchecked;
 } else {
-  Promo[0].unchecked=Promo[0].unchecked;
-  Promo[1].unchecked=Promo[1].checked;
+  Promo[0]=Promo[0].unchecked;
+  Promo[1]=Promo[1].checked;
 }
 }
 function updateRecord(formData){
