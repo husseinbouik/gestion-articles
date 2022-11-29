@@ -19,7 +19,7 @@
       <div class="header">
         <h2>Formulaire des produits de vente</h2>
       </div>
-      <form id="form" class="form" onsubmit="event.preventDefault();onFormSubmit();" autoucomplete="off">
+      <form id="form" class="form" onsubmit="event.preventDefault()" autoucomplete="off">
         <div class="form-control">
           <div><label for="nom">Nom</label></div>
           <div><input type="text" placeholder="Nom" id="nom" />
@@ -75,7 +75,7 @@
           </div>
           <div class="mis1"></div>
         </div>
-        <div><input type="button" value="submit" onclick=" boom()"></div>
+        <div><input type="button" id="A"value="Ajouter" onclick="boom();getitdone()"></div>
       </form>
       <div class="drops">
         <div class="drop drop-1"></div>
@@ -94,7 +94,6 @@
           <th scope="col">Date Production</th>
           <th scope="col">Type</th>
           <th scope="col">Promotion</th>
-          <th scope="col"></th>
         </tr>
       </thead>
       <tbody>

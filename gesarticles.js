@@ -9,6 +9,7 @@ const mis1 = document.querySelector(".mis1");
 const mis2 = document.querySelector(".mis2");
 const button = document.querySelector(".btn");
 let arr = [];
+var promo;
 
 function validatenom(lnom) {
   if (lnom.value.trim() === "") {
@@ -19,19 +20,10 @@ function validatenom(lnom) {
     setSuccessFor(lnom, "Looks Good!");
   }
 }
-// function validateprix(lprix) {
-//   if (lprix.value.trim() === "") {
-//     setErrorFor(lprix, "Last name is required");
-//   } else if (lprix.value.length < 3 || lprix.value.length > 30|| ) {
-//     setErrorFor(lprix, "Last name is invalid");
-//   } else {
-//     setSuccessFor(lprix, "Looks Good!");
-//   }
-// }
 function validatemarque(lmarque) {
   if (lmarque.value.trim() === "") {
     setErrorFor(lmarque, "Last name is required");
-  } else if (lmarque.value.length < 1 || lmarque.value.length > 30) {
+  } else if (lmarque.value.length < 2 || lmarque.value.length > 30) {
     setErrorFor(lmarque, "Last name is invalid");
   } else {
     setSuccessFor(lmarque, "Looks Good!");
@@ -45,19 +37,6 @@ function validateprix(lprix) {
     setSuccessFor(lprix, "Looks Good!");
   } else {
     setErrorFor(lprix, "price is invalid");
-  }
-}
-function validatephone(phone) {
-  if (phone.value.trim() === "") {
-    setErrorFor(phone, "Phone number  is required");
-  } else if (
-    phone.value.match(
-      /^((\+212)?[ -])?(06|05|07)(\d{1})[ -]?(\d{3})[ -]?(\d{4})+$/
-    )
-  ) {
-    setSuccessFor(phone, "Looks Good!");
-  } else {
-    setErrorFor(phone, "Phone number is invalid");
   }
 }
 nom.addEventListener("keyup", function () {
@@ -84,29 +63,35 @@ function boom() {
     setSuccessFor(nom, "Looks Good!");
     arr.push(true);
   }
+  console.log(arr.length)
   if (prixValue === "") {
-    setErrorFor(prix, "prix is required");
-  } else if (prixValue.length < 3 || prixValue.length > 30) {
-    setErrorFor(prix, "prix is invalid");
-  } else {
+    setErrorFor(prix, "price  is required");
+  } else if ((prixValue.length > 1) && prixValue.length < 30 && prixValue.match(/([A-Z]{3}|[A-Z]?[\$€¥])?\s?(\d{1,3}((,\d{1,3})+)?(.\d{1,3})?(.\d{1,3})?(,\d{1,3})?)/ )
+    ) {
     setSuccessFor(prix, "Looks Good!");
     arr.push(true);
+  } else {
+    setErrorFor(prix, "price is invalid");
   }
+  console.log(arr.length)
   if (marqueValue === "") {
     setErrorFor(marque, "marque is required");
-  } else if (marqueValue.length < 3 || marqueValue.length > 30) {
+  } else if (marqueValue.length < 2 || marqueValue.length > 30) {
     setErrorFor(marque, "marque is invalid");
   } else {
     setSuccessFor(marque, "Looks Good!");
     arr.push(true);
   }
+  console.log(arr.length)
   if (dateValue === "") {
     setErrorFor(date, "Date is required");
   } else {
     setSuccessFor(date, "Looks Good!");
     arr.push(true);
   }
+  console.log(arr.length)
   var gen = !Promo[0].checked && !Promo[1].checked;
+
   if (Promo[0].checked) {
     arr.push(true);
     mis1.innerHTML = "Look good !";
@@ -121,12 +106,14 @@ function boom() {
     mis1.innerHTML = "Choose one";
     mis1.style.color = "red";
   }
+  console.log(arr.length)
 if (typeValue ===''){
   setErrorFor(type,"choose one");
 }else{
   setSuccessFor(type,"Looks good!");
   arr.push(true);
 }
+console.log(arr.length)
 }
 function setErrorFor(input, message) {
   const formControl = input.parentElement;
@@ -140,11 +127,23 @@ function setSuccessFor(input, message) {
   formControl.className = "form-control success";
   samp.innerText = message;
 }
+
 var selectedRow = null;
+function getitdone(){
+  boom()
+  arr.length = 0;
+  boom()
+  if(arr.length!=6){
+    arr.length = 0;
+    boom()
+  }else {
+    onFormSubmit()
+  }
+}
+
 function onFormSubmit() {
-  boom();
   var formData = readFormData();
-  if( selectedRow == null && arr.length!=6)
+  if( selectedRow == null )
         insertNewRecord(formData);
         else
         updateRecord(formData);
@@ -170,7 +169,6 @@ function insertNewRecord(data) {
 //   var x=newRow.insertElement(i);
 //       x.innerHTML= data.table[i];
 // }
-
   cell1 = newRow.insertCell(0);
   cell1.innerHTML = data.nom;
   cell2 = newRow.insertCell(1);
@@ -195,38 +193,41 @@ document.getElementById("date").value="";
 document.getElementById("type").value="";
 Promo[0].checked=Promo[0].unchecked;
 Promo[1].checked=Promo[1].unchecked;
-// document.getElementById("promo").value="";
 var selectedRow = null;
-
 }
 function onEdit(td){
+  document.getElementById("A").value="modifier";
+  // document.getElementById("A").id="M";
 selectedRow =td.parentElement.parentElement;
 document.getElementById("nom").value= selectedRow.cells[0].innerHTML;
 document.getElementById("prix").value= selectedRow.cells[1].innerHTML;
 document.getElementById("marque").value= selectedRow.cells[2].innerHTML;
 document.getElementById("date").value= selectedRow.cells[3].innerHTML;
 document.getElementById("type").value= selectedRow.cells[4].innerHTML;
-document.getElementById("promo").value= selectedRow.cells[5].innerHTML;
 if (Promo[0].checked) {
   document.getElementById("o").value= selectedRow.cells[5].innerHTML;
 } else {
   document.getElementById("n").value= selectedRow.cells[5].innerHTML;
 }
-if (promo===document.getElementById("o").value) {
-Promo[0]=Promo[0].checked;
-Promo[1]=Promo[1].unchecked;
-} else {
-  Promo[0]=Promo[0].unchecked;
-  Promo[1]=Promo[1].checked;
+if (selectedRow.cells[5].innerHTML="Oui") {
+  document.getElementById("o").checked = true;
+} else  {
+  document.getElementById("n").checked = true;
 }
 }
 function updateRecord(formData){
+
   selectedRow.cells[0].innerHTML = formData.nom;
   selectedRow.cells[1].innerHTML = formData.prix;
   selectedRow.cells[2].innerHTML = formData.marque;
   selectedRow.cells[3].innerHTML = formData.date;
   selectedRow.cells[4].innerHTML = formData.type;
   selectedRow.cells[5].innerHTML = formData.promo;
+  if (selectedRow.cells[5].innerHTML=document.getElementById("o").value) {
+    Promo[0].unchecked=Promo[0].checked ;
+  } else  {
+    Promo[1].unchecked=Promo[1].checked ;
+  }
 }
 function onDelete(td){
   if(confirm('are you sure to delete this record?')){

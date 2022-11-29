@@ -1,14 +1,25 @@
  body {
-  padding-left: 5%;
-  padding-right: 5%;
+  padding: 5%;
   margin: 0%;
+  background: linear-gradient(45deg, #fc466b, #3f5efb);
+  height: 100vh;
+  font-family: 'Montserrat', sans-serif;
 }
-
+.container {
+  margin: 0%;
+  padding: 0%;
+  display: flex;
+  gap: 14%;
+}
 .hc{
   width: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
 }
 .header {
-  padding: 40px 57px;
+  padding: 18px 57px;
   border-radius: 100px 100px 0px 0px;
   text-align: center;
 }
@@ -223,26 +234,12 @@ select {
 
 table {
   border-collapse: collapse;
+  float:right;
 }
 th,
 td {
   border: 3px solid rosybrown;
 } 
-body {
-  background: linear-gradient(45deg, #fc466b, #3f5efb);
-  height: 100vh;
-  font-family: 'Montserrat', sans-serif;
-}
-.container {
-  margin: 0%;
-  padding: 0%;
-  display: flex;
-  flex-direction: row;
-  gap: 14%;
-}
-.hc {
-  position: absolute;
-  transform: translate(-50%, -50%);
-  top: 50%;
-  left: 50%;
-}
+
+
+
