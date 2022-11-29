@@ -1,56 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="gesarticles.css" />
-    <script src="https://kit.fontawesome.com/0e22389e8c.js" crossorigin="anonymous"></script>
-    <script src="gesarticles.js" defer></script>
-    <title>Document</title>
-  </head>
-  <body>
-    <div class="container">
-      <div class="hc">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="gesarticles.css" />
+  <script src="https://kit.fontawesome.com/0e22389e8c.js" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+  <script src="gesarticles.js" defer></script>
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="container">
+    <div class="hc">
       <div class="header">
         <h2>Formulaire des produits de vente</h2>
       </div>
-      <form  id="form" class="form" onsubmit="event.preventDefault();onFormSubmit();"autoucomplete="off">
+      <form id="form" class="form" onsubmit="event.preventDefault();onFormSubmit();" autoucomplete="off">
         <div class="form-control">
-          <label for="nom">Nom</label>
-          <input type="text" placeholder="Nom" id="nom"/>
-          <i class="fas fa-check-circle"></i>
-          <i class="fas fa-exclamation-circle"></i>
-          <small>Error message</small>
-          <samp></samp>
-      </div>
-      <div class="form-control">
-        <label for="prix">Prix</label>
-        <input type="text" placeholder="1500$" id="prix" />
-        <i class="fas fa-check-circle"></i>
-        <i class="fas fa-exclamation-circle"></i>
-        <small>Error message</small>
-        <samp></samp>
-    </div>
-    <div class="form-control">
-      <label for="marque">Marque</label>
-      <input type="text" placeholder="The Ordinary" id="marque" />
-      <i class="fas fa-check-circle"></i>
-      <i class="fas fa-exclamation-circle"></i>
-      <small>Error message</small>
-      <samp></samp>
-  </div>
-  <div class="form-control">
-    <label for="date">Date Production:</label>
-    <input type="date" placeholder="first_name" id="date" />
-    <i class="fas fa-check-circle"></i>
-    <i class="fas fa-exclamation-circle"></i>
-    <small>Error message</small>
-    <samp></samp>
-</div>
+          <div><label for="nom">Nom</label></div>
+          <div><input type="text" placeholder="Nom" id="nom" />
+            <i class="fas fa-check-circle"></i>
+            <i class="fas fa-exclamation-circle"></i>
+            <small>Error message</small>
+            <samp></samp></div>
+        </div>
         <div class="form-control">
-          <label>Type:</label>
-          <select title="type" id="type" >
+          <div><label for="prix">Prix</label></div>
+          <div> <input type="text" placeholder="1500$" id="prix" />
+            <i class="fas fa-check-circle"></i>
+            <i class="fas fa-exclamation-circle"></i>
+            <small>Error message</small>
+            <samp></samp></div>
+        </div>
+        <div class="form-control">
+          <div> <label for="marque">Marque</label></div>
+          <div><input type="text" placeholder="The Ordinary" id="marque" />
+            <i class="fas fa-check-circle"></i>
+            <i class="fas fa-exclamation-circle"></i>
+            <small>Error message</small>
+            <samp></samp></div>
+        </div>
+        <div class="form-control">
+          <div><label for="date">Date Production:</label></div>
+          <div><input type="date" placeholder="first_name" id="date" />
+            <i class="fas fa-check-circle"></i>
+            <i class="fas fa-exclamation-circle"></i>
+            <small>Error message</small>
+            <samp></samp></div>
+        </div>
+        <div class="form-control">
+          <div><label>Type:</label></div>
+          <div><select title="type" id="type">
             <option value="">--Type--</option>
             <option>hygiène et toilette</option>
             <option>soins esthétiques</option>
@@ -61,34 +65,42 @@
             <option>parfums</option>
           </select>
           <small></small>
-          <samp></samp>
+          <samp></samp></div>
         </div>
         <div class="form-control">
           <label>Est en Promotion:</label>
           <div class="fm">
-            <div><label><input id="o" type="radio" title="g"  name="P" value="Oui"/>Oui</label></div>
-            <div><label><input id="n" type="radio" title="g" name="P" value="Non"/>Non</label></div>
+            <div><label><input id="o" type="radio" title="g" name="P" value="Oui" />Oui</label></div>
+            <div><label><input id="n" type="radio" title="g" name="P" value="Non" />Non</label></div>
           </div>
           <div class="mis1"></div>
         </div>
-        <div><input  class="btn" type="submit" value="submit" onclick=" boom()" ></div>
+        <div><input type="button" value="submit" onclick=" boom()"></div>
       </form>
+      <div class="drops">
+        <div class="drop drop-1"></div>
+        <div class="drop drop-2"></div>
+        <div class="drop drop-3"></div>
+        <div class="drop drop-4"></div>
+        <div class="drop drop-5"></div>
+      </div>
     </div>
-      <table class="table" id="productsdetails">
-        <thead>
-          <tr>
-            <th scope="col">Nom</th>
-            <th scope="col">Prix</th>
-            <th scope="col">Marque</th>
-            <th scope="col">Date Production</th>
-            <th scope="col">Type</th>
-            <th scope="col">Promotion</th>
-            <th scope="col"></th>
-          </tr>
-        </thead>
-        <tbody>
-        </tbody>
-      </table>
-    </div>
-  </body>
+    <table class="table" id="productsdetails">
+      <thead>
+        <tr>
+          <th scope="col">Nom</th>
+          <th scope="col">Prix</th>
+          <th scope="col">Marque</th>
+          <th scope="col">Date Production</th>
+          <th scope="col">Type</th>
+          <th scope="col">Promotion</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  </div>
+</body>
+
 </html>
