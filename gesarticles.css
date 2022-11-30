@@ -1,5 +1,6 @@
  body {
-  padding: 5%;
+  padding-top: 19%;
+  padding-right: 2%;
   margin: 0%;
   background: linear-gradient(45deg, #fc466b, #3f5efb);
   height: 100vh;
@@ -8,15 +9,15 @@
 .container {
   margin: 0%;
   padding: 0%;
-  display: flex;
+
   gap: 14%;
 }
 .hc{
-  width: 50%;
+  width: 48%;
   position: absolute;
   transform: translate(-50%, -50%);
-  top: 50%;
-  left: 50%;
+  top: 66%;
+  left: 26%;
 }
 .header {
   padding: 18px 57px;
@@ -102,7 +103,7 @@ form:hover {
 .drop-1 {
   height: 80px;
   width: 80px;
-  top: -20px;
+  top: 67px;
   left: -40px;
   z-index: -1;
 }
@@ -115,14 +116,14 @@ form:hover {
 .drop-3 {
   height: 100px;
   width: 100px;
-  bottom: 120px;
-  right: -50px;
+  bottom: 230px;
+  right: 8px;
   z-index: -1;
 }
 .drop-4 {
   height: 120px;
   width: 120px;
-  top: -60px;
+  top: 21px;
   right: -60px;
 }
 .drop-5 {
@@ -235,6 +236,7 @@ select {
 table {
   border-collapse: collapse;
   float:right;
+  width: 48%;
 }
 th,
 td {

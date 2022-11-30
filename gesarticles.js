@@ -9,6 +9,7 @@ const mis1 = document.querySelector(".mis1");
 const mis2 = document.querySelector(".mis2");
 const button = document.querySelector(".btn");
 let arr = [];
+let ajt = document.getElementById("A"); 
 var promo;
 
 function validatenom(lnom) {
@@ -129,25 +130,30 @@ function setSuccessFor(input, message) {
 }
 
 var selectedRow = null;
-function getitdone(){
-  boom()
+ajt.onclick = function getitdone() {
   arr.length = 0;
   boom()
   if(arr.length!=6){
     arr.length = 0;
-    boom()
+    boom();
   }else {
-    onFormSubmit()
+    var formData = readFormData();
+    insertNewRecord(formData);
+    resetform();
   }
 }
+// function getitdone(){
+//   arr.length = 0;
+//   boom()
+//   if(arr.length!=6){
+//     e.preventDefault();
+//   }else {
+//     onFormSubmit()
+//   }
+// }
 
 function onFormSubmit() {
-  var formData = readFormData();
-  if( selectedRow == null )
-        insertNewRecord(formData);
-        else
-        updateRecord(formData);
-        resetform();
+ 
 }
 function readFormData() {
   var formData =[];
@@ -196,38 +202,48 @@ Promo[1].checked=Promo[1].unchecked;
 var selectedRow = null;
 }
 function onEdit(td){
-  document.getElementById("A").value="modifier";
-  // document.getElementById("A").id="M";
+  document.getElementById("A").value = "modifier";
+  document.getElementById("A").id = "M";
+  let mdf = document.getElementById("M"); 
 selectedRow =td.parentElement.parentElement;
 document.getElementById("nom").value= selectedRow.cells[0].innerHTML;
 document.getElementById("prix").value= selectedRow.cells[1].innerHTML;
 document.getElementById("marque").value= selectedRow.cells[2].innerHTML;
 document.getElementById("date").value= selectedRow.cells[3].innerHTML;
 document.getElementById("type").value= selectedRow.cells[4].innerHTML;
-if (Promo[0].checked) {
-  document.getElementById("o").value= selectedRow.cells[5].innerHTML;
-} else {
-  document.getElementById("n").value= selectedRow.cells[5].innerHTML;
-}
-if (selectedRow.cells[5].innerHTML="Oui") {
+if (selectedRow.cells[5].innerHTML === "Oui") {
   document.getElementById("o").checked = true;
 } else  {
   document.getElementById("n").checked = true;
 }
+mdf.onclick = function () {
+  arr.length = 0;
+  boom();
+  if (arr.length != 6) {
+    arr.length = 0;
+    boom();
+  } else {
+    var formData = readFormData();
+    updateRecord(formData);
+        resetform();
+    document.getElementById("M").value = "Ajouter";
+    document.getElementById("M").id = "A";
+  }
+};
 }
 function updateRecord(formData){
-
   selectedRow.cells[0].innerHTML = formData.nom;
   selectedRow.cells[1].innerHTML = formData.prix;
   selectedRow.cells[2].innerHTML = formData.marque;
   selectedRow.cells[3].innerHTML = formData.date;
   selectedRow.cells[4].innerHTML = formData.type;
   selectedRow.cells[5].innerHTML = formData.promo;
-  if (selectedRow.cells[5].innerHTML=document.getElementById("o").value) {
-    Promo[0].unchecked=Promo[0].checked ;
-  } else  {
-    Promo[1].unchecked=Promo[1].checked ;
+  if (Promo[0].checked) {
+     selectedRow.cells[5].innerHTML = document.getElementById("o").value;
+  } else {
+     selectedRow.cells[5].innerHTML = document.getElementById("n").value;
   }
+ 
 }
 function onDelete(td){
   if(confirm('are you sure to delete this record?')){
