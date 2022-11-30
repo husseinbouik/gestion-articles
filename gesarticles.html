@@ -19,7 +19,7 @@
       <div class="header">
         <h2>Formulaire des produits de vente</h2>
       </div>
-      <form id="form" class="form" onsubmit="event.preventDefault()" autoucomplete="off">
+      <form id="form" class="form"  autoucomplete="off">
         <div class="form-control">
           <div><label for="nom">Nom</label></div>
           <div><input type="text" placeholder="Nom" id="nom" />
@@ -99,6 +99,21 @@
       <tbody>
       </tbody>
     </table>
+    <h2>Delete Modal</h2>    
+    <div id="id01" class="modal">
+      <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">×</span>
+      <form class="modal-content" action="/action_page.php">
+        <div class="container">
+          <h1>Delete Account</h1>
+          <p>Are you sure you want to delete your account?</p>
+        
+          <div class="clearfix">
+            <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+            <button type="button" onclick="delet()" class="deletebtn">Delete</button>
+          </div>
+        </div>
+      </form>
+    </div>
   </div>
 </body>
 </html>
