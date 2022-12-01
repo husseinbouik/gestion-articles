@@ -225,6 +225,8 @@ function resetform() {
   for (let i = 0; i < ff.length; i++) {
     if (ff[i].classList.contains("success")) {
       ff[i].classList.remove("success");
+      mis1.innerHTML = " ";
+    mis1.style.color = "green";
     }
   }
 }
