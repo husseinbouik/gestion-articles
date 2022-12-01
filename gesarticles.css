@@ -246,6 +246,7 @@ table {
   text-align: center;
   position: relative;
   transition: all 0.2s ease-in-out;
+  margin-left: 3%;
 }
 th,
 td {
@@ -263,7 +264,7 @@ td {
 
 /* Set a style for all buttons */
 button {
-  background-color: #04AA6D;
+  background:linear-gradient(45deg, #fc466b, #3f5efb);
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
@@ -271,6 +272,7 @@ button {
   cursor: pointer;
   width: 100%;
   opacity: 0.9;
+  border-radius: 50px;
 }
 
 button:hover {
@@ -319,7 +321,7 @@ button:hover {
   background-color: #fefefe;
   margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
   border: 1px solid #888;
-  width: 80%; /* Could be more or less, depending on screen size */
+  width: 45%; /* Could be more or less, depending on screen size */
 }
 
 /* Style the horizontal ruler */
