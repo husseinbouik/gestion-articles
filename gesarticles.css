@@ -56,7 +56,7 @@ form a {
   font-size: 12px;
 }
 form a:hover {
-  text-shadow: 2px 2px 6px #000 40;
+  text-shadow: 2px 2px 6px #000 ;
 }
 form a:active {
   text-shadow: none;
