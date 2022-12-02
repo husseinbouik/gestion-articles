@@ -261,19 +261,14 @@ let getrow
 function onDelete(td) {
   getrow=td.parentElement.parentElement;
   document.getElementById('id01').style.display='block'
-  // if(confirm('are you sure to delete this record?')){
-
-  // }
 }
 function delet()
 {
   document.getElementById("productsdetails").deleteRow(getrow.rowIndex);
   document.getElementById('id01').style.display='none'
-
 }
-// Get the modal
+console.log(getrow.rowIndex)
 var modal = document.getElementById("id01");
-// When the user clicks anywhere outside of the modal, close it
 window.onclick = function (event) {
   if (event.target == modal) {
     modal.style.display = "none";
