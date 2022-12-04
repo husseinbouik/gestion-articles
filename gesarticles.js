@@ -11,7 +11,8 @@ const button = document.querySelector(".btn");
 let arr = [];
 let ajt = document.getElementById("A");
 var promo;
-
+const tableBody = document.querySelector("#productsdetails tbody");
+const contIdEdit = document.getElementById('contIdEdit');
 function validatenom(lnom) {
   if (lnom.value.trim() === "") {
     setErrorFor(lnom, "First name is required");
@@ -138,139 +139,183 @@ function setSuccessFor(input, message) {
   formControl.className = "form-control success";
   samp.innerText = message;
 }
-
-var selectedRow = null;
 ajt.onclick = function getitdone() {
-  if (ajt.value === "Ajouter") {
-    arr.length = 0;
-    boom();
-    if (arr.length != 6) {
+    if (ajt.value === "Ajouter") {
       arr.length = 0;
       boom();
-    } else {
-      var formData = readFormData();
-      insertNewRecord(formData);
-      resetform();
+      if (arr.length != 6) {
+        arr.length = 0;
+        boom();
+      } else {
+        let id = Math.floor(Math.random() * 1000000);
+        const newEmp = new Product(id, nom.value, prix.value, marque.value, date.value, type.value, promo);
+        newEmp.showData().storeProduct();
+        nom.value = '';
+        prix.value = '';
+        marque.value = '';
+        date.value = '';
+        type.value = '';
+        Promo[0].checked = Promo[0].unchecked;
+        Promo[1].checked = Promo[1].unchecked;
+      }
+    } else if (ajt.value === "Modifier") {
+      arr.length = 0;
+      boom();
+      if (arr.length != 6) {
+        arr.length = 0;
+        boom();
+      } else {
+        document.getElementById("A").value = "Ajouter";
+        const id = contIdEdit.value;
+        const newEmp = new Product(id, nom.value, prix.value, marque.value, date.value, type.value, promo);
+        newEmp.updateProduct(id);
+        tableBody.innerHTML = "";
+        Product.showAllProducts();
+        nom.value = '';
+        prix.value = '';
+        marque.value = '';
+        date.value = '';
+        type.value = '';
+        Promo[0].checked = Promo[0].unchecked;
+        Promo[1].checked = Promo[1].unchecked;
+      }
     }
-  } else if (ajt.value === "Modifier") {
-    arr.length = 0;
-    boom();
-    if (arr.length != 6) {
-      arr.length = 0;
-      boom();
-    } else {
-      var formData = readFormData();
-      updateRecord(formData);
-      resetform();
-      document.getElementById("A").value = "Ajouter";
+   
+  };
+  
+  class Product {
+    constructor(id, nom, prix, marque, date, type, promo) {
+      this.id = id;
+      this.nom = nom;
+      this.prix = prix;
+      this.marque = marque;
+      this.date = date;
+      this.type = type;
+      this.promo = promo;
+    }
+    showData() {
+      Product.showHtml(this.id, this.nom, this.prix, this.marque, this.date, this.type, this.promo);
+      return this;
+    }
+    storeProduct() {
+      const allData = JSON.parse(localStorage.getItem('products')) ?? [];
+      allData.push({ id: this.id, nom: this.nom, prix: this.prix, marque: this.marque, date: this.date, type: this.type, promo: this.promo })
+      localStorage.setItem('products', JSON.stringify(allData))
+    }
+    static showAllProducts() {
+      if (localStorage.getItem('products')) {
+        JSON.parse(localStorage.getItem('products')).forEach((item) => {
+          Product.showHtml(item.id, item.nom, item.prix, item.marque, item.date, item.type, item.promo);
+  
+        })
+  
+      }
+    }
+    updateProduct(id) {
+      const newItem = { id: id, nom: this.nom, prix: this.prix, marque: this.marque, date: this.date, type: this.type, promo: this.promo };
+      const updateData = JSON.parse(localStorage.getItem("products")).map((item) => {
+        if (item.id == id) {
+          return newItem;
+        }
+        return item;
+      })
+  
+      localStorage.setItem("products", JSON.stringify(updateData));
+    }
+  
+    static showHtml(id, nom, prix, marque, date, type, promo) {
+      const trEl = document.createElement('tr');
+      trEl.innerHTML = `
+              <tr  role='row'>
+              <td>${nom}</td>
+              <td>${prix}</td>
+              <td>${marque}</td>
+              <td>${date}</td>
+              <td>${type}</td>
+              <td>${promo}</td>
+                  <td>
+                      <button   class="btn btn-info edit" data-id="${id}">Edit</button>
+                      <button onclick="onDelete(this)" class="btn btn-danger delete" data-id="${id}">Delete</button>
+                  </td>
+              </tr>
+          `;
+      tableBody.appendChild(trEl);
     }
   }
-};
-// function getitdone(){
-//   arr.length = 0;
-//   boom()
-//   if(arr.length!=6){
-//     e.preventDefault();
-//   }else {
-//     onFormSubmit()
+  Product.showAllProducts();
+  tableBody.addEventListener("click", (e) => {
+
+
+    if (e.target.classList.contains("delete")) {
+        const id = +e.target.getAttribute("data-id");
+        const emps = JSON.parse(localStorage.getItem('products'))
+        const newData = emps.filter((el) => el.id != +id);
+        localStorage.setItem("products", JSON.stringify(newData));
+        e.target.parentElement.parentElement.remove();
+    }
+
+
+    if (e.target.classList.contains("edit")) {
+        const id = +e.target.getAttribute("data-id");
+        const mainItem = JSON.parse(localStorage.getItem('products')).find(item => item.id === id);
+        contIdEdit.value = id;
+        nom.value = mainItem.nom;
+        prix.value = mainItem.prix;
+        marque.value = mainItem.marque;
+        date.value = mainItem.date;
+        type.value = mainItem.type;
+        console.log(promo)
+        if (promo === document.getElementById("o").value) {
+          document.getElementById("o").checked = true;
+        } else {
+          document.getElementById("n").checked = true;
+        }
+      
+        document.getElementById("A").value = "Modifier";
+
+
+    }
+})
+// ajt.onclick = function getitdone() {
+//   if (ajt.value === "Ajouter") {
+//     arr.length = 0;
+//     boom();
+//     if (arr.length != 6) {
+//       arr.length = 0;
+//       boom();
+//     } else {
+//       var formData = readFormData();
+//       insertNewRecord(formData);
+//       resetform();
+//     }
+//   } else if (ajt.value === "Modifier") {
+//     arr.length = 0;
+//     boom();
+//     if (arr.length != 6) {
+//       arr.length = 0;
+//       boom();
+//     } else {
+//       var formData = readFormData();
+//       updateRecord(formData);
+//       resetform();
+//       document.getElementById("A").value = "Ajouter";
+//     }
 //   }
+// };
+// let getrow
+// function onDelete(td) {
+//   getrow=td.parentElement.parentElement;
+//   document.getElementById('id01').style.display='block'
 // }
-
-function readFormData() {
-  var formData = [];
-  formData["nom"] = document.getElementById("nom").value;
-  formData["prix"] = document.getElementById("prix").value;
-  formData["marque"] = document.getElementById("marque").value;
-  formData["date"] = document.getElementById("date").value;
-  formData["type"] = document.getElementById("type").value;
-  formData["promo"] = promo;
-  return formData;
-}
-
-function insertNewRecord(data) {
-  var table = document
-    .getElementById("productsdetails")
-    .getElementsByTagName("tbody")[0];
-  var newRow = table.insertRow(table.length);
-  //   for (let i=0;i<table.length;i++) {
-  //   var x=newRow.insertElement(i);
-  //       x.innerHTML= data.table[i];
-  // }
-  cell1 = newRow.insertCell(0);
-  cell1.innerHTML = data.nom;
-  cell2 = newRow.insertCell(1);
-  cell2.innerHTML = data.prix;
-  cell3 = newRow.insertCell(2);
-  cell3.innerHTML = data.marque;
-  cell4 = newRow.insertCell(3);
-  cell4.innerHTML = data.date;
-  cell5 = newRow.insertCell(4);
-  cell5.innerHTML = data.type;
-  cell6 = newRow.insertCell(5);
-  cell6.innerHTML = data.promo;
-  cell6 = newRow.insertCell(6);
-  cell6.innerHTML = `<button onClick="onEdit(this)">Edit</button>
-  <button onclick="onDelete(this)">Delete</button>`;
-}
-function resetform() {
-  document.getElementById("nom").value = "";
-  document.getElementById("prix").value = "";
-  document.getElementById("marque").value = "";
-  document.getElementById("date").value = "";
-  document.getElementById("type").value = "";
-  Promo[0].checked = Promo[0].unchecked;
-  Promo[1].checked = Promo[1].unchecked;
-  var selectedRow = null;
-  const ff = document.querySelectorAll(".form-control");
-  for (let i = 0; i < ff.length; i++) {
-    if (ff[i].classList.contains("success")) {
-      ff[i].classList.remove("success");
-      mis1.innerHTML = " ";
-    mis1.style.color = "green";
-    }
-  }
-}
-function onEdit(td) {
-  document.getElementById("A").value = "Modifier";
-  selectedRow = td.parentElement.parentElement;
-  document.getElementById("nom").value = selectedRow.cells[0].innerHTML;
-  document.getElementById("prix").value = selectedRow.cells[1].innerHTML;
-  document.getElementById("marque").value = selectedRow.cells[2].innerHTML;
-  document.getElementById("date").value = selectedRow.cells[3].innerHTML;
-  document.getElementById("type").value = selectedRow.cells[4].innerHTML;
-  if (selectedRow.cells[5].innerHTML === "Oui") {
-    document.getElementById("o").checked = true;
-  } else {
-    document.getElementById("n").checked = true;
-  }
-}
-function updateRecord(formData) {
-  selectedRow.cells[0].innerHTML = formData.nom;
-  selectedRow.cells[1].innerHTML = formData.prix;
-  selectedRow.cells[2].innerHTML = formData.marque;
-  selectedRow.cells[3].innerHTML = formData.date;
-  selectedRow.cells[4].innerHTML = formData.type;
-  selectedRow.cells[5].innerHTML = formData.promo;
-  if (Promo[0].checked) {
-    selectedRow.cells[5].innerHTML = document.getElementById("o").value;
-  } else {
-    selectedRow.cells[5].innerHTML = document.getElementById("n").value;
-  }
-}
-let getrow
-function onDelete(td) {
-  getrow=td.parentElement.parentElement;
-  document.getElementById('id01').style.display='block'
-}
-function delet()
-{
-  document.getElementById("productsdetails").deleteRow(getrow.rowIndex);
-  document.getElementById('id01').style.display='none'
-}
-console.log(getrow.rowIndex)
-var modal = document.getElementById("id01");
-window.onclick = function (event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-};
+// function delet()
+// {
+//   document.getElementById("productsdetails").deleteRow(getrow.rowIndex);
+//   document.getElementById('id01').style.display='none'
+// }
+// console.log(getrow.rowIndex)
+// var modal = document.getElementById("id01");
+// window.onclick = function (event) {
+//   if (event.target == modal) {
+//     modal.style.display = "none";
+//   }
+// };
